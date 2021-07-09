@@ -2,7 +2,7 @@
 
 #### Kateryna Nekhomiazh 
 
-'heart_disease_uci.py' file contains an implementation of Logistic Regression algorithm, preparation of Heart Disease UCI dataset and application of the algorithm on the dataset.
+'heart_disease_uci.py' file contains an implementation of Logistic Regression algorithm, preparation of Heart Disease UCI dataset and application of the algorithm on the dataset. \
 'medical_cost_personal.py' file contains an implementation of Linear Regression algorithm, preparation of Medical Cost Personal dataset and application of the algorithm on the dataset.
 
 

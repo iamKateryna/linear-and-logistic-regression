@@ -5,6 +5,11 @@ from collections import OrderedDict
 PATH = "dataset_1/processed.cleveland.data"
 
 
+def sigmoid(z):
+    """Calculates the value of sigmoid function"""
+    return 1 / (1 + np.exp(-z))
+
+
 class MyLogisticRegression:
     """
     Logistic Regression classifier.
@@ -73,7 +78,7 @@ class MyLogisticRegression:
             m = X.shape[1]
             Y_prediction = np.zeros((1, m))
 
-            A = self.sigmoid(np.dot(weights.T, X) + bias)
+            A = sigmoid(np.dot(weights.T, X) + bias)
 
             for i in range(A.shape[1]):
                 if A[0, i] > 0.5:
@@ -93,10 +98,6 @@ class MyLogisticRegression:
         prediction = OrderedDict({"Training set": Y_prediction_train, "Test set": Y_prediction_test})
 
         return prediction
-
-    def sigmoid(self, z):
-        """Calculates the value of sigmoid function"""
-        return 1 / (1 + np.exp(-z))
 
     def optimize(self, w, b, X, Y):
         """
@@ -136,7 +137,7 @@ class MyLogisticRegression:
             """
             m = X_set.shape[1]
 
-            A = self.sigmoid(np.dot(weights.T, X_set) + bias)
+            A = sigmoid(np.dot(weights.T, X_set) + bias)
             cost_function = (-1 / m) * np.sum(Y_set * np.log(A) + (1 - Y_set) * (np.log(1 - A)))
 
             dw_value = (1 / m) * np.dot(X_set, (A - Y_set).T)
@@ -173,22 +174,12 @@ def prepare_data(path):
     health['target'] = health['target'].replace([2, 3, 4], 1)
     health = health.astype(float)
 
-    health['cp'][health['cp'] == 1] = 'typical angina'
-    health['cp'][health['cp'] == 2] = 'atypical angina'
-    health['cp'][health['cp'] == 3] = 'non-anginal pain'
-    health['cp'][health['cp'] == 4] = 'asymptomatic'
-
-    health['restecg'][health['restecg'] == 0] = 'normal'
-    health['restecg'][health['restecg'] == 1] = 'ST-T wave abnormality'
-    health['restecg'][health['restecg'] == 2] = 'left ventricular hypertrophy'
-
-    health['slope'][health['slope'] == 1] = 'upsloping'
-    health['slope'][health['slope'] == 2] = 'flat'
-    health['slope'][health['slope'] == 3] = 'downsloping'
-
-    health['thal'][health['thal'] == 3.0] = 'normal'
-    health['thal'][health['thal'] == 6.0] = 'fixed defect'
-    health['thal'][health['thal'] == 7.0] = 'reversable defect'
+    health['cp'] = ['typical angina' if x == 1 else 'atypical angina' if x == 2 else 'non-anginal pain'
+                    if x == 3 else 'asymptomatic' for x in health['cp']]
+    health['restecg'] = ['normal' if x == 0 else 'ST-T wave abnormality' if x == 1 else 'left ventricular hypertrophy'
+                         for x in health['restecg']]
+    health['slope'] = ['upsloping' if x == 1 else 'flat' if x == 2 else 'downsloping' for x in health['slope']]
+    health['thal'] = ['normal' if x == 3.0 else 'fixed defect' if x == 6.0 else 'defect' for x in health['thal']]
 
     health = pd.get_dummies(health)
 

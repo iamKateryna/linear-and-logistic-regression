@@ -1,8 +1,4 @@
-# ML Test Assignment
-
-## Author: Kateryna Nekhomiazh
-
-This repository contains implementations and applications of two machine learning algorithms on two different datasets: Heart Disease UCI and Medical Cost Personal.
+# This repository contains implementations and applications of two machine learning algorithms on two different datasets: Heart Disease UCI and Medical Cost Personal.
 
 ### File Descriptions
 - `heart_disease_uci.py`: Implements Logistic Regression on the Heart Disease UCI dataset.

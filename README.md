@@ -1,4 +1,4 @@
-# This repository contains implementations and applications of two machine learning algorithms on two different datasets: Heart Disease UCI and Medical Cost Personal.
+# Implementation of Logistic and Linear Regression and their application on two different datasets
 
 ### File Descriptions
 - `heart_disease_uci.py`: Implements Logistic Regression on the Heart Disease UCI dataset.
